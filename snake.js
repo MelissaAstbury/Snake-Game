@@ -1,6 +1,6 @@
 import { getInputDirection } from './input.js';
 
-export const SNAKE_SPEED = 3;
+export const SNAKE_SPEED = 5;
 /* 
 Now declare where the snake will start 
 */

@@ -1,13 +1,14 @@
 import { onSnake, expandSnake } from './snake.js';
+import { randomGridPosition } from './grid.js';
 
-let food = { x: 10, y: 1 };
+let food = getRandomFoodPosition();
 /* Now we need to declare how much the snake grows once eaten food */
 const EXPANSION_RATE = 1;
 
 export function update() {
   if (onSnake(food)) {
     expandSnake(EXPANSION_RATE);
-    food = { x: 20, y: 20 };
+    food = getRandomFoodPosition();
   }
 }
 
@@ -17,4 +18,14 @@ export function draw(canvas) {
   foodElement.style.gridColumnStart = food.x;
   foodElement.classList.add('food');
   canvas.appendChild(foodElement);
+}
+
+/* Now we need to randomly generate the food position - this can not be on the snake */
+function getRandomFoodPosition() {
+  let newFoodPosition;
+  /* This while loop will carry on looping until it is not on the snake */
+  while (newFoodPosition == null || onSnake(newFoodPosition)) {
+    newFoodPosition = randomGridPosition();
+  }
+  return newFoodPosition;
 }
