@@ -43,10 +43,27 @@ export function expandSnake(amount) {
   newSegments += amount;
 }
 
-export function onSnake(position) {
-  return snakeBody.some((segment) => {
+export function onSnake(position, { ignoreHead = false } = {}) {
+  return snakeBody.some((segment, index) => {
+    /* Return false as the snake head will always be on the snake head */
+    if (ignoreHead && index === 0) return false;
     return equalPositions(segment, position);
   });
+}
+
+/* The first element is always the first one in the array */
+export function getSnakeHead() {
+  return snakeBody[0];
+}
+
+/* 
+Check if the head of the snake is touching any other part of the snake.
+We need to loop over the head of the snake as the head of the snake
+will always be true so the game will always fail. We need to start
+from the next segment to see if there is an interception
+ */
+export function snakeIntersection() {
+  return onSnake(snakeBody[0], { ignoreHead: true });
 }
 
 function equalPositions(pos1, pos2) {
