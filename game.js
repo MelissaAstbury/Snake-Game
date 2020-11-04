@@ -1,15 +1,16 @@
 const canvas = document.getElementById('canvas');
-
 import {
   update as updateSnake,
   draw as drawSnake,
   SNAKE_SPEED,
 } from './snake.js';
 
+import { update as updateFood, draw as drawFood } from './food.js';
+
 /* 
 Create a continous loop - this is needed as this will control the location of the snake
- on the page - the more times it is rendered the more smooth the transaction will be
- */
+on the page - the more times it is rendered the more smooth the transaction will be
+*/
 
 let lastRenderTime = 0;
 
@@ -30,6 +31,7 @@ window.requestAnimationFrame(main);
 
 function update() {
   updateSnake();
+  updateFood();
 }
 
 function draw() {
@@ -39,4 +41,5 @@ function draw() {
   */
   canvas.innerHTML = '';
   drawSnake(canvas);
+  drawFood(canvas);
 }
