@@ -4,6 +4,7 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
@@ -12,17 +13,23 @@ body {
 }
 
 #canvas {
-  background-color: #6c6b6b;
-  width: 100vmin;
-  height: 100vmin;
+  background-color: black;
+  border: 2px solid red;
+  width: 400px;
+  height: 400px;
   display: grid;
   grid-template-rows: repeat(21, 1fr);
   grid-template-columns: repeat(21, 1fr);
 }
 
+#title {
+  color: white;
+}
+
 .snake {
   background-color: purple;
   border: 0.25vmin solid black;
+  border-radius: 25px;
 }
 
 .food {

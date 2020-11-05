@@ -2,14 +2,14 @@ const canvas = document.getElementById('canvas');
 import {
   update as updateSnake,
   draw as drawSnake,
-  SNAKE_SPEED,
+  snakeSpeed,
   getSnakeHead,
-  snakeIntersection,
+  snakeCollision,
 } from './snake.js';
 
 import { update as updateFood, draw as drawFood } from './food.js';
 
-import { outsideGrid } from './grid.js';
+import { outsideGrid } from './layout.js';
 
 /* 
 Create a continous loop - this is needed as this will control the location of the snake
@@ -27,7 +27,7 @@ function main(currentTime) {
   /* Get the result of how fast the page rendered in seconds instead of milliseconds */
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
 
-  if (secondsSinceLastRender < 1 / SNAKE_SPEED) return;
+  if (secondsSinceLastRender < 1 / snakeSpeed) return;
   /* 1 / 2 = 0.5 */
   lastRenderTime = currentTime;
 
@@ -40,7 +40,7 @@ window.requestAnimationFrame(main);
 function update() {
   updateSnake();
   updateFood();
-  checkDeath();
+  checkGameOver();
 }
 
 function draw() {
@@ -53,6 +53,6 @@ function draw() {
   drawFood(canvas);
 }
 
-function checkDeath() {
-  gameOver = outsideGrid(getSnakeHead()) || snakeIntersection();
+function checkGameOver() {
+  gameOver = outsideGrid(getSnakeHead()) || snakeCollision();
 }

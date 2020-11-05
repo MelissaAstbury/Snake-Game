@@ -1,6 +1,6 @@
-import { getInputDirection } from './input.js';
+import { getInputDirection } from './keys.js';
 
-export const SNAKE_SPEED = 5;
+export const snakeSpeed = 5;
 /* 
 Now declare where the snake will start 
 */
@@ -8,7 +8,7 @@ const snakeBody = [{ x: 11, y: 11 }];
 let newSegments = 0;
 /*  
 This function needs to move the snake around. However, we need to make sure that when 
-the snake move to the left or right, that only the first one is moved and the rest 
+the snake moves to the left or right, that only the first one is moved and the rest 
 follow the pattern
 */
 export function update() {
@@ -39,10 +39,11 @@ export function draw(canvas) {
   });
 }
 
-export function expandSnake(amount) {
+export function growSnake(amount) {
   newSegments += amount;
 }
 
+/* This is the function for checking the collision */
 export function onSnake(position, { ignoreHead = false } = {}) {
   return snakeBody.some((segment, index) => {
     /* Return false as the snake head will always be on the snake head */
@@ -62,7 +63,7 @@ We need to loop over the head of the snake as the head of the snake
 will always be true so the game will always fail. We need to start
 from the next segment to see if there is an interception
  */
-export function snakeIntersection() {
+export function snakeCollision() {
   return onSnake(snakeBody[0], { ignoreHead: true });
 }
 
